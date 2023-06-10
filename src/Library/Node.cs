@@ -7,7 +7,8 @@ namespace Library
     public class Node
     {
         private int number;
-
+        
+        public INodeElement Person {get;set;}
         private List<Node> children = new List<Node>();
 
         public int Number {
@@ -24,8 +25,9 @@ namespace Library
             }
         }
 
-        public Node(int number)
+        public Node(INodeElement person, int number)
         {
+            this.Person = person;
             this.number = number;
         }
 
@@ -34,5 +36,9 @@ namespace Library
             this.children.Add(n);
         }
         
+        public void Accept(Visitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }
